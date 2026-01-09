@@ -106,7 +106,7 @@ def prepare_input(modalities):
     # Check we have all required modalities
     required = ['t1n', 't1c', 't2f', 't2w']
     if not all(m in modalities for m in required):
-        return None, None
+        return None, None, None
     
     # Combine modalities
     combined = np.stack([
@@ -122,7 +122,20 @@ def prepare_input(modalities):
     
     # Then resize to model's expected input shape (64, 64, 64, 4)
     # Using simple downsampling for CPU compatibility
-    downsampled = combined[::2, ::2, ::2, :]
+    #downsampled = combined[::2, ::2, ::2, :]
+    from scipy.ndimage import zoom
+
+    target_size = 96
+    
+    zoom_factors = (
+        target_size / combined.shape[0],
+        target_size / combined.shape[1],
+        target_size / combined.shape[2],
+        1
+    )
+    
+    downsampled = zoom(combined, zoom_factors, order=1)
+
     
     return downsampled, original_shape, combined
 
@@ -280,4 +293,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
