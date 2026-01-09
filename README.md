@@ -25,4 +25,5 @@ Through this project, I gained practical experience in:
 - Deploying the trained model with **Streamlit** for easy demo and sharing
 - Building AI solutions with accessibility and real-world deployment in mind
 
-## Project Structure
+## Link to full tutorial on how to implement the project
+check out details on how to implement the model https://www.protocols.io/view/lightweight-brain-tumor-segmentation-on-low-resour-gz4sbx8wf.html
